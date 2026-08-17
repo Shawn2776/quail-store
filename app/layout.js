@@ -1,4 +1,5 @@
 import { Archivo, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -21,7 +22,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${archivo.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children} <Analytics />
+      </body>
     </html>
   );
 }

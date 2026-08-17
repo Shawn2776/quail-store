@@ -3,42 +3,41 @@ import { featuredProduct } from "@/lib/data";
 export function FeaturedProduct() {
   return (
     <section className="bg-white">
-      <div className="max-w-[1400px] mx-auto px-4 py-12">
-        <h2 className="text-2xl md:text-3xl mb-6">Available now</h2>
-
-        <div className="border border-grey-line rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-[380px_1fr]">
-          <div className="bg-grey-bg flex items-center justify-center p-10 aspect-square md:aspect-auto">
-            <div className="text-6xl">🥚</div>
+      <div className="max-w-[1400px] mx-auto px-4 py-12 md:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
+          <div className="bg-grey-bg rounded-2xl flex items-center justify-center h-64 md:h-80">
+            <div className="text-7xl">🥚</div>
           </div>
 
-          <div className="p-6 md:p-8 flex flex-col">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-turquoise-dark uppercase tracking-wide mb-2 w-fit">
+          <div>
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-turquoise-dark uppercase tracking-wide mb-3">
               <span className="w-1.5 h-1.5 rounded-full bg-turquoise" />
               In stock — local pickup
             </span>
 
-            <h3 className="text-2xl md:text-3xl font-display font-extrabold mb-2">{featuredProduct.name}</h3>
+            <h2 className="text-3xl md:text-4xl font-display font-extrabold mb-3">{featuredProduct.name}</h2>
 
-            <p className="text-black/60 max-w-[52ch] mb-6">{featuredProduct.description}</p>
+            <p className="text-black/60 text-lg max-w-[52ch] mb-8">{featuredProduct.description}</p>
 
-            <div className="grid grid-cols-2 gap-3 max-w-md mb-2">
-              {featuredProduct.variants.map((variant) => (
-                <div
-                  key={variant.label}
-                  className="border border-grey-line rounded-xl p-4 hover:border-black transition-colors"
-                >
-                  <div className="text-sm font-semibold mb-1">{variant.label}</div>
-                  <div className="text-2xl font-display font-extrabold text-orange mb-3">
-                    ${variant.price.toFixed(2)}
-                  </div>
-                  <button className="w-full bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-2.5 rounded-full">
-                    Add to cart
-                  </button>
-                </div>
-              ))}
+            <div className="grid grid-cols-2 gap-4 max-w-lg mb-4">
+              <div className="border border-grey-line rounded-xl p-5 hover:border-black transition-colors">
+                <div className="text-sm font-semibold mb-1">Half dozen</div>
+                <div className="text-3xl font-display font-extrabold text-orange mb-4">$4.00</div>
+                <button className="w-full bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-3 rounded-full">
+                  Add to cart
+                </button>
+              </div>
+
+              <div className="border border-grey-line rounded-xl p-5 hover:border-black transition-colors">
+                <div className="text-sm font-semibold mb-1">Full dozen</div>
+                <div className="text-3xl font-display font-extrabold text-orange mb-4">$7.00</div>
+                <button className="w-full bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-3 rounded-full">
+                  Add to cart
+                </button>
+              </div>
             </div>
 
-            <p className="text-xs text-black/50 mt-4">Local pickup only — no shipping at this time.</p>
+            <p className="text-sm text-black/50">Local pickup only — no shipping at this time.</p>
           </div>
         </div>
       </div>

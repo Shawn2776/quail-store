@@ -1,4 +1,8 @@
+import { categories } from "@/lib/data";
+
 export function Footer() {
+  const liveCategories = categories.filter((c) => c.status === "live");
+
   return (
     <footer className="bg-black text-white/70">
       <div className="max-w-[1400px] mx-auto px-4 py-12">
@@ -11,34 +15,20 @@ export function Footer() {
               <span className="font-display font-extrabold text-white text-lg">2776 QUAIL CO.</span>
             </div>
             <p className="text-sm leading-relaxed max-w-[32ch]">
-              A small Coturnix quail flock selling eggs, and soon hatching stock, live birds, and meat — all by local
-              pickup.
+              A small Coturnix quail flock selling eggs, raised local, local pickup only.
             </p>
           </div>
 
           <div>
             <h4 className="text-white font-bold text-sm uppercase tracking-wide mb-3">Shop</h4>
             <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#shop" className="hover:text-orange">
-                  Table eggs
-                </a>
-              </li>
-              <li>
-                <a href="#shop" className="hover:text-orange">
-                  Hatching eggs — soon
-                </a>
-              </li>
-              <li>
-                <a href="#shop" className="hover:text-orange">
-                  Live quail — soon
-                </a>
-              </li>
-              <li>
-                <a href="#shop" className="hover:text-orange">
-                  Quail meat — soon
-                </a>
-              </li>
+              {liveCategories.map((category) => (
+                <li key={category.id}>
+                  <a href="#shop" className="hover:text-orange">
+                    {category.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

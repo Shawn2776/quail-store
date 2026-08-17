@@ -1,5 +1,3 @@
-import { categories } from "@/lib/data";
-
 export function Header() {
   return (
     <header className="sticky top-0 z-50">
@@ -72,7 +70,6 @@ export function Header() {
             </div>
           </div>
 
-          {/* Search bar drops to its own row on mobile, where there's no room beside the logo/icons */}
           <div className="mt-3 md:hidden">
             <div className="flex items-center border-2 border-black rounded-full overflow-hidden">
               <input
@@ -90,25 +87,6 @@ export function Header() {
           </div>
         </div>
       </div>
-
-      {/* Category nav row */}
-      <nav className="bg-black">
-        <div className="max-w-[1400px] mx-auto px-4 flex items-center gap-7 h-11 text-sm font-semibold text-white overflow-x-auto">
-          <a href="#shop" className="hover:text-orange whitespace-nowrap">
-            Shop All
-          </a>
-          {categories.map((category) => (
-            <a
-              key={category.id}
-              href="#shop"
-              className="hover:text-orange whitespace-nowrap flex items-center gap-1.5 shrink-0"
-            >
-              {category.name}
-              {category.status === "soon" && <span className="text-[10px] font-bold text-turquoise">SOON</span>}
-            </a>
-          ))}
-        </div>
-      </nav>
     </header>
   );
 }

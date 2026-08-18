@@ -1,3 +1,6 @@
+"use client";
+
+import { track } from "@vercel/analytics";
 import { HatchCamPanel } from "./HatchCamPanel";
 
 export function Hero() {
@@ -16,11 +19,15 @@ export function Hero() {
             Order online, pick up at the coop.
           </p>
           <div className="flex gap-3 flex-wrap">
-            <button className="bg-orange hover:bg-orange-dark transition-colors px-6 py-3 rounded-full font-bold text-black">
+            <button
+              onClick={() => track("Hero CTA Click", { button: "Shop table eggs" })}
+              className="bg-orange hover:bg-orange-dark transition-colors px-6 py-3 rounded-full font-bold text-black"
+            >
               Shop table eggs
             </button>
             <a
               href="#hatchcam"
+              onClick={() => track("Hero CTA Click", { button: "Watch the coop" })}
               className="border-2 border-white hover:bg-white hover:text-black transition-colors px-6 py-3 rounded-full font-bold inline-flex items-center"
             >
               Watch the coop

@@ -1,3 +1,6 @@
+"use client";
+
+import { track } from "@vercel/analytics";
 import { featuredProduct } from "@/lib/data";
 
 export function FeaturedProduct() {
@@ -23,7 +26,10 @@ export function FeaturedProduct() {
               <div className="border border-grey-line rounded-xl p-5 hover:border-black transition-colors">
                 <div className="text-sm font-semibold mb-1">Half dozen</div>
                 <div className="text-3xl font-display font-extrabold text-orange mb-4">$4.00</div>
-                <button className="w-full bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-3 rounded-full">
+                <button
+                  onClick={() => track("Add to Cart", { variant: "Half dozen", price: 4.0 })}
+                  className="w-full bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-3 rounded-full"
+                >
                   Add to cart
                 </button>
               </div>
@@ -31,7 +37,10 @@ export function FeaturedProduct() {
               <div className="border border-grey-line rounded-xl p-5 hover:border-black transition-colors">
                 <div className="text-sm font-semibold mb-1">Full dozen</div>
                 <div className="text-3xl font-display font-extrabold text-orange mb-4">$7.00</div>
-                <button className="w-full bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-3 rounded-full">
+                <button
+                  onClick={() => track("Add to Cart", { variant: "Full dozen", price: 7.0 })}
+                  className="w-full bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-3 rounded-full"
+                >
                   Add to cart
                 </button>
               </div>

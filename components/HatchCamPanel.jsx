@@ -1,11 +1,17 @@
 import { hatchCam } from "@/lib/data";
 
+const badgeText = {
+  live: "HATCH CAM — LIVE",
+  photo: "THE FLOCK",
+  offline: "HATCH CAM",
+};
+
 export function HatchCamPanel() {
   return (
     <div className="relative rounded-2xl overflow-hidden bg-white/5 border border-white/15 aspect-[16/10] flex items-center justify-center">
       <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/70 backdrop-blur px-3 py-1.5 rounded-full text-xs font-bold">
-        <span className="w-2 h-2 rounded-full bg-turquoise animate-pulse" />
-        HATCH CAM
+        {hatchCam.mode === "live" && <span className="w-2 h-2 rounded-full bg-turquoise animate-pulse" />}
+        {badgeText[hatchCam.mode]}
       </div>
 
       {hatchCam.mode === "live" && hatchCam.liveEmbedUrl ? (
@@ -17,7 +23,7 @@ export function HatchCamPanel() {
         />
       ) : hatchCam.mode === "photo" && hatchCam.photoUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={hatchCam.photoUrl} alt="The coop" className="w-full h-full object-cover" />
+        <img src={hatchCam.photoUrl} alt="Our Coturnix quail" className="w-full h-full object-cover" />
       ) : (
         <div className="text-center px-8">
           <div className="text-5xl mb-3">📷</div>

@@ -1,17 +1,26 @@
-import { Archivo, Inter } from "next/font/google";
+import { Fraunces, Work_Sans, IBM_Plex_Mono } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
+import { AuthAnalytics } from "@/components/AuthAnalytics";
 import "./globals.css";
 
-const archivo = Archivo({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-archivo",
-  weight: ["600", "700", "800", "900"],
+  variable: "--font-fraunces",
+  weight: ["400", "500", "600", "700", "900"],
+  style: ["normal", "italic"],
 });
 
-const inter = Inter({
+const workSans = Work_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-worksans",
   weight: ["400", "500", "600", "700"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-plexmono",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata = {
@@ -21,10 +30,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${inter.variable}`}>
-      <body>
-        {children} <Analytics />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={`${fraunces.variable} ${workSans.variable} ${plexMono.variable}`}>
+        <body>
+          {children}
+          <Analytics />
+          <AuthAnalytics />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

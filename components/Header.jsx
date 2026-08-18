@@ -1,3 +1,7 @@
+"use client";
+
+import { Show, SignInButton, UserButton } from "@clerk/nextjs";
+
 export function Header() {
   return (
     <header className="sticky top-0 z-50">
@@ -56,10 +60,18 @@ export function Header() {
             </div>
 
             <div className="flex items-center gap-4 ml-auto shrink-0">
-              <button className="flex flex-col items-center text-xs font-semibold hover:text-orange">
-                <span className="text-xl leading-none">👤</span>
-                <span className="hidden sm:block mt-0.5">Account</span>
-              </button>
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button className="flex flex-col items-center text-xs font-semibold hover:text-orange">
+                    <span className="text-xl leading-none">👤</span>
+                    <span className="hidden sm:block mt-0.5">Sign in</span>
+                  </button>
+                </SignInButton>
+              </Show>
+              <Show when="signed-in">
+                <UserButton afterSignOutUrl="/" />
+              </Show>
+
               <button className="relative flex flex-col items-center text-xs font-semibold hover:text-orange">
                 <span className="text-xl leading-none">🛒</span>
                 <span className="hidden sm:block mt-0.5">Cart</span>

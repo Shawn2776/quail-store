@@ -50,6 +50,11 @@ export function Footer() {
                   Hatch cam
                 </a>
               </li>
+              <li>
+                <a href="/privacy" className="hover:text-orange">
+                  Privacy policy
+                </a>
+              </li>
             </ul>
           </div>
 

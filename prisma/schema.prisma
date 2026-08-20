@@ -16,3 +16,36 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Category {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String
+  status      String   @default("soon") // "live" | "soon"
+  price       Decimal? @db.Decimal(10, 2)
+  stockCount  Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  qaEntries QaEntry[]
+}
+
+model QaEntry {
+  id         String   @id @default(cuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  date       DateTime @default(now())
+  note       String
+  hatchRate  Float?
+  mortality  Int?
+  createdAt  DateTime @default(now())
+}
+
+model HatchCamSettings {
+  id           String   @id @default(cuid())
+  mode         String   @default("offline") // "offline" | "photo" | "live"
+  photoUrl     String?
+  liveEmbedUrl String?
+  updatedAt    DateTime @updatedAt
+}

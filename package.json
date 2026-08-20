@@ -23,6 +23,10 @@
     "@biomejs/biome": "2.4.2",
     "@tailwindcss/postcss": "^4",
     "prisma": "^6.19.3",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4",
+    "tsx": "^4.23.12"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }

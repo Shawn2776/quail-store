@@ -2,6 +2,7 @@ import { Fraunces, Work_Sans, IBM_Plex_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthAnalytics } from "@/components/AuthAnalytics";
+import { ClarityAnalytics } from "@/components/ClarityAnalytics";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
           {children}
           <Analytics />
           <AuthAnalytics />
+          <ClarityAnalytics />
         </body>
       </html>
     </ClerkProvider>

@@ -1,17 +1,22 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { UserButton } from "@clerk/nextjs";
 
+const ADMIN_HOST = "quail-admin.2776.ltd";
+
 const navItems = [
-  { href: "/admin", label: "Overview" },
-  { href: "/admin/categories", label: "Categories" },
-  { href: "/admin/qa", label: "QA Log" },
-  { href: "/admin/users", label: "Users" },
-  { href: "/admin/hatchcam", label: "Hatch Cam" },
+  { suffix: "", label: "Overview" },
+  { suffix: "/categories", label: "Categories" },
+  { suffix: "/qa", label: "QA Log" },
+  { suffix: "/users", label: "Users" },
+  { suffix: "/hatchcam", label: "Hatch Cam" },
 ];
 
-function NavLink({ href, label, isActive }) {
+function NavLink({ isAdminHost, suffix, label, isActive }) {
+  const href = isAdminHost ? suffix || "/" : `/admin${suffix}`;
+
   return (
     <a
       href={href}
@@ -26,6 +31,11 @@ function NavLink({ href, label, isActive }) {
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
+  const [isAdminHost, setIsAdminHost] = useState(false);
+
+  useEffect(() => {
+    setIsAdminHost(window.location.hostname === ADMIN_HOST);
+  }, []);
 
   return (
     <div className="min-h-screen bg-grey-bg flex">
@@ -37,12 +47,18 @@ export default function AdminLayout({ children }) {
 
         <nav className="flex-1 px-3 py-4 space-y-1">
           {navItems.map((item) => (
-            <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} />
+            <NavLink
+              key={item.suffix}
+              isAdminHost={isAdminHost}
+              suffix={item.suffix}
+              label={item.label}
+              isActive={pathname === `/admin${item.suffix}`}
+            />
           ))}
         </nav>
 
         <div className="px-4 py-4 border-t border-white/10 flex items-center justify-between">
-          <a href="/" className="text-xs text-white/50 hover:text-white">
+          <a href={isAdminHost ? "https://quail.2776.ltd" : "/"} className="text-xs text-white/50 hover:text-white">
             ← Back to store
           </a>
           <UserButton afterSignOutUrl="/" />

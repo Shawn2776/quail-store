@@ -18,8 +18,16 @@ export function CheckoutForm() {
   async function handleSubmit(method) {
     setError("");
 
+    const digitsOnly = phone.replace(/\D/g, "");
+    const isValidPhone = digitsOnly.length === 10;
+
     if (!email || (!isSignedIn && !name)) {
       setError("Please fill in your name and email.");
+      return;
+    }
+
+    if (!phone || !isValidPhone) {
+      setError("Please enter a valid 10-digit phone number for pickup coordination.");
       return;
     }
 
@@ -93,8 +101,11 @@ export function CheckoutForm() {
           </span>
           <input
             type="tel"
+            inputMode="numeric"
+            placeholder="(208) 555-0123"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            required
             className="mt-1 w-full border border-grey-line rounded-lg px-3 py-2 text-sm"
           />
         </label>

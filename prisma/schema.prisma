@@ -32,14 +32,15 @@ model Category {
 }
 
 model QaEntry {
-  id         String   @id @default(cuid())
-  categoryId String
-  category   Category @relation(fields: [categoryId], references: [id])
-  date       DateTime @default(now())
-  note       String
-  hatchRate  Float?
-  mortality  Int?
-  createdAt  DateTime @default(now())
+  id          String   @id @default(cuid())
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  date        DateTime @default(now())
+  note        String
+  eggsSet     Int?
+  eggsHatched Int?
+  chicksDied  Int?
+  createdAt   DateTime @default(now())
 }
 
 model HatchCamSettings {

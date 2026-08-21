@@ -5,6 +5,8 @@ import { FeaturedProduct } from "@/components/FeaturedProduct";
 import { Story } from "@/components/Story";
 import { Footer } from "@/components/Footer";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <>

@@ -1,15 +1,17 @@
 import { prisma } from "@/lib/prisma";
 import { getVisitorCount, getEventCounts } from "@/lib/vercelAnalytics";
+import { getClarityDailySummary } from "@/lib/clarity";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminOverviewPage() {
-  const [liveCategoryCount, qaEntryCount, userCount, visitorCount, eventCounts] = await Promise.all([
+  const [liveCategoryCount, qaEntryCount, userCount, visitorCount, eventCounts, claritySummary] = await Promise.all([
     prisma.category.count({ where: { status: "live" } }),
     prisma.qaEntry.count(),
     prisma.user.count(),
     getVisitorCount(),
     getEventCounts(),
+    getClarityDailySummary(),
   ]);
 
   const stats = [
@@ -56,6 +58,19 @@ export default async function AdminOverviewPage() {
           <p className="text-sm text-black/60 mb-4">
             Watch how real visitors move through the site, via Microsoft Clarity.
           </p>
+
+          {claritySummary && (
+            <div className="flex gap-6 mb-4 text-sm">
+              <div>
+                <div className="text-xl font-display font-extrabold text-orange">{claritySummary.sessions ?? "—"}</div>
+                <div className="text-xs text-black/50">Sessions today</div>
+              </div>
+              <div>
+                <div className="text-xl font-display font-extrabold text-orange">{claritySummary.users ?? "—"}</div>
+                <div className="text-xs text-black/50">Visitors today</div>
+              </div>
+            </div>
+          )}
 
           <a
             href="https://clarity.microsoft.com/projects/view/y5k3faxelb/gettingstarted"

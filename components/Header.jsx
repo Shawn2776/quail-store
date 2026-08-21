@@ -1,8 +1,11 @@
 "use client";
 
 import { Show, SignInButton, UserButton } from "@clerk/nextjs";
+import { useCart } from "@/components/CartProvider";
 
 export function Header() {
+  const { itemCount } = useCart();
+
   return (
     <header className="sticky top-0 z-50">
       {/* Top utility strip */}
@@ -72,13 +75,15 @@ export function Header() {
                 <UserButton afterSignOutUrl="/" />
               </Show>
 
-              <button className="relative flex flex-col items-center text-xs font-semibold hover:text-orange">
+              <a href="/cart" className="relative flex flex-col items-center text-xs font-semibold hover:text-orange">
                 <span className="text-xl leading-none">🛒</span>
                 <span className="hidden sm:block mt-0.5">Cart</span>
-                <span className="absolute -top-1 -right-2 bg-turquoise text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  0
-                </span>
-              </button>
+                {itemCount > 0 && (
+                  <span className="absolute -top-1 -right-2 bg-turquoise text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {itemCount}
+                  </span>
+                )}
+              </a>
             </div>
           </div>
 

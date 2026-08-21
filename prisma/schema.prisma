@@ -15,6 +15,8 @@ model User {
   name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  orders Order[]
 }
 
 model Category {
@@ -22,14 +24,15 @@ model Category {
   slug        String   @unique
   name        String
   description String
-  status      String   @default("soon") // "live" | "soon"
+  status      String   @default("soon")
   price       Decimal? @db.Decimal(10, 2)
   stockCount  Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  qaEntries QaEntry[]
-  variants  ProductVariant[]
+  qaEntries  QaEntry[]
+  variants   ProductVariant[]
+  orderItems OrderItem[]
 }
 
 model ProductVariant {
@@ -41,6 +44,40 @@ model ProductVariant {
   stockCount Int?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  orderItems OrderItem[]
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  userId          String?
+  user            User?    @relation(fields: [userId], references: [id])
+  guestName       String?
+  guestEmail      String?
+  guestPhone      String?
+  paymentMethod   String // "stripe" | "pickup"
+  status          String   @default("pending") // "pending" | "paid" | "ready" | "completed" | "cancelled"
+  stripeSessionId String?  @unique
+  pickupNotes     String?
+  total           Decimal  @db.Decimal(10, 2)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  items OrderItem[]
+}
+
+model OrderItem {
+  id         String          @id @default(cuid())
+  orderId    String
+  order      Order           @relation(fields: [orderId], references: [id])
+  categoryId String
+  category   Category        @relation(fields: [categoryId], references: [id])
+  variantId  String?
+  variant    ProductVariant? @relation(fields: [variantId], references: [id])
+  label      String
+  price      Decimal         @db.Decimal(10, 2)
+  quantity   Int
+  createdAt  DateTime        @default(now())
 }
 
 model QaEntry {

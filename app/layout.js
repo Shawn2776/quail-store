@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthAnalytics } from "@/components/AuthAnalytics";
 import { ClarityAnalytics } from "@/components/ClarityAnalytics";
+import { CartProvider } from "@/components/CartProvider";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -34,7 +35,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en" className={`${fraunces.variable} ${workSans.variable} ${plexMono.variable}`}>
         <body>
-          {children}
+          <CartProvider>{children}</CartProvider>
           <Analytics />
           <AuthAnalytics />
           <ClarityAnalytics />

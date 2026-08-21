@@ -51,8 +51,10 @@ export async function FeaturedProduct() {
                           ${Number(variant.price).toFixed(2)}
                         </div>
                         <AddToCartButton
+                          id={variant.id}
+                          categoryId={category.id}
                           categoryName={category.name}
-                          variantLabel={variant.label}
+                          label={variant.label}
                           price={Number(variant.price)}
                         />
                       </div>

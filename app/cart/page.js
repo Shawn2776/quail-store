@@ -12,10 +12,10 @@ export default function CartPage() {
         <p className="text-black/60 mb-6">Nothing here yet — go grab some eggs.</p>
 
         <a
-          href="/"
-          className="inline-block bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-3 px-6 rounded-full"
+          href="/checkout"
+          className="bg-orange hover:bg-orange-dark transition-colors text-black font-bold text-sm py-3 px-8 rounded-full"
         >
-          Back to shop
+          Checkout
         </a>
       </div>
     );

@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.category.upsert({
+  const tableEggs = await prisma.category.upsert({
     where: { slug: "table-eggs" },
     update: {},
     create: {
@@ -13,6 +13,30 @@ async function main() {
       status: "live",
       price: 7.0,
       stockCount: 24,
+    },
+  });
+
+  await prisma.productVariant.upsert({
+    where: { id: "table-eggs-half-dozen" },
+    update: {},
+    create: {
+      id: "table-eggs-half-dozen",
+      categoryId: tableEggs.id,
+      label: "Half dozen",
+      price: 4.0,
+      stockCount: 12,
+    },
+  });
+
+  await prisma.productVariant.upsert({
+    where: { id: "table-eggs-full-dozen" },
+    update: {},
+    create: {
+      id: "table-eggs-full-dozen",
+      categoryId: tableEggs.id,
+      label: "Full dozen",
+      price: 7.0,
+      stockCount: 12,
     },
   });
 

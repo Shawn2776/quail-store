@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { addQaEntry } from "./actions";
+import { QaEntryForm } from "@/components/admin/QaEntryForm";
 
 export const dynamic = "force-dynamic";
 
@@ -30,68 +30,7 @@ export default async function QaLogPage() {
       <h1 className="text-2xl font-display font-extrabold mb-1">QA Log</h1>
       <p className="text-black/60 mb-8">Log raw counts — hatch rate and survival rate are calculated for you.</p>
 
-      <form action={addQaEntry} className="bg-white border border-grey-line rounded-xl p-5 max-w-xl mb-10">
-        <h2 className="font-display font-extrabold text-lg mb-4">Add entry</h2>
-
-        <label className="block mb-4">
-          <span className="text-xs font-semibold text-black/50 uppercase tracking-wide">Category</span>
-          <select
-            name="categoryId"
-            required
-            className="mt-1 w-full border border-grey-line rounded-lg px-3 py-2 text-sm"
-          >
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <div className="grid grid-cols-3 gap-4 mb-4">
-          <label className="block">
-            <span className="text-xs font-semibold text-black/50 uppercase tracking-wide">Eggs set</span>
-            <input
-              type="number"
-              name="eggsSet"
-              className="mt-1 w-full border border-grey-line rounded-lg px-3 py-2 text-sm"
-            />
-          </label>
-          <label className="block">
-            <span className="text-xs font-semibold text-black/50 uppercase tracking-wide">Eggs hatched</span>
-            <input
-              type="number"
-              name="eggsHatched"
-              className="mt-1 w-full border border-grey-line rounded-lg px-3 py-2 text-sm"
-            />
-          </label>
-          <label className="block">
-            <span className="text-xs font-semibold text-black/50 uppercase tracking-wide">Died post-hatch</span>
-            <input
-              type="number"
-              name="chicksDied"
-              className="mt-1 w-full border border-grey-line rounded-lg px-3 py-2 text-sm"
-            />
-          </label>
-        </div>
-
-        <label className="block mb-5">
-          <span className="text-xs font-semibold text-black/50 uppercase tracking-wide">Note</span>
-          <textarea
-            name="note"
-            required
-            rows={3}
-            className="mt-1 w-full border border-grey-line rounded-lg px-3 py-2 text-sm"
-          />
-        </label>
-
-        <button
-          type="submit"
-          className="bg-black hover:bg-orange transition-colors text-white font-bold text-sm py-2 px-5 rounded-full"
-        >
-          Add entry
-        </button>
-      </form>
+      <QaEntryForm categories={categories} />
 
       <h2 className="font-display font-extrabold text-lg mb-4">Recent entries</h2>
       <div className="space-y-3 max-w-xl">

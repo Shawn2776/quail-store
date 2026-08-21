@@ -1,7 +1,10 @@
-import { categories } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
 
-export function Footer() {
-  const liveCategories = categories.filter((c) => c.status === "live");
+export async function Footer() {
+  const liveCategories = await prisma.category.findMany({
+    where: { status: "live" },
+    orderBy: { createdAt: "asc" },
+  });
 
   return (
     <footer className="bg-black text-white/70">
@@ -29,6 +32,7 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+              {liveCategories.length === 0 && <li className="text-white/40">Check back soon</li>}
             </ul>
           </div>
 

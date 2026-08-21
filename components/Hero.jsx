@@ -1,9 +1,10 @@
 "use client";
 
 import { track } from "@vercel/analytics";
-import { HatchCamPanel } from "./HatchCamPanel";
 
-export function Hero() {
+const btnBase = "font-semibold text-[0.96rem] px-6 py-3 rounded-full border transition-colors";
+
+export function Hero({ hatchCamSlot }) {
   return (
     <section className="bg-black text-white">
       <div className="max-w-[1400px] mx-auto px-4 py-8 md:py-12 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 items-center">
@@ -21,21 +22,22 @@ export function Hero() {
           <div className="flex gap-3 flex-wrap">
             <button
               onClick={() => track("Hero CTA Click", { button: "Shop table eggs" })}
-              className="bg-orange hover:bg-orange-dark transition-colors px-6 py-3 rounded-full font-bold text-black"
+              className={`${btnBase} bg-orange hover:bg-orange-dark text-black border-transparent`}
             >
               Shop table eggs
             </button>
+
             <a
               href="#hatchcam"
               onClick={() => track("Hero CTA Click", { button: "Watch the coop" })}
-              className="border-2 border-white hover:bg-white hover:text-black transition-colors px-6 py-3 rounded-full font-bold inline-flex items-center"
+              className={`${btnBase} border-white hover:bg-white hover:text-black inline-flex items-center`}
             >
               Watch the coop
             </a>
           </div>
         </div>
 
-        <HatchCamPanel />
+        {hatchCamSlot}
       </div>
     </section>
   );
